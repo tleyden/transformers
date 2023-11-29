@@ -1966,7 +1966,7 @@ class Trainer:
 
         # add remaining tr_loss
         self._total_loss_scalar += tr_loss.item()
-        effective_global_step = min(self.state.global_step, 1) # Avoid ZeroDivisionError
+        effective_global_step = max(self.state.global_step, 1) # Avoid ZeroDivisionError
         train_loss = self._total_loss_scalar / effective_global_step
 
         metrics = speed_metrics(
